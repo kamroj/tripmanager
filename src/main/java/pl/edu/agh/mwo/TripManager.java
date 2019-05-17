@@ -18,9 +18,42 @@ class TripManager {
 		return tripList;
 	}
 
-	Trip findTrip(String keyWord) { //todo dokończyć
+	Trip findTrip(String keyWord) {
 		if (keyWord == null || keyWord.isEmpty())
 			return null;
+
+		return findTripViaTripNames(keyWord.toLowerCase());
+	}
+
+	private Trip findTripViaTripNames(String key) {
+		for (String tripName: tripList.keySet()) {
+			if(tripName.toLowerCase().contains(key)) {
+				return tripList.get(tripName);
+			}
+		}
+		return findTripViaDescription(key);
+	}
+
+	private Trip findTripViaDescription(String key) {
+		for (String tripName: tripList.keySet()) {
+			Trip trip = tripList.get(tripName);
+
+			if (trip.getDescription().toLowerCase().contains(key))
+				return trip;
+		}
+		return findTripViaPhotoComment(key);
+	}
+
+	private Trip findTripViaPhotoComment(String key) {
+		for (String tripName: tripList.keySet()) {
+			Trip trip = tripList.get(tripName);
+
+			for (Photo photo: trip.getAlbum().getPhotos()) {
+				if(photo.getComment().toLowerCase().contains(key))
+					return trip;
+			}
+		}
+		return null;
 	}
 
 	void remove(String name) {
