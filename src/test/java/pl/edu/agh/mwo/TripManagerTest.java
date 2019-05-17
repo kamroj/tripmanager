@@ -126,4 +126,20 @@ public class TripManagerTest {
         //Assert
         assertNull(result);
     }
+
+    @Test
+    public void testFindTrip_whenKeyIsEmpty_returnNull() throws TripAlreadyExistsException {
+        //Arrange
+        Trip tripPoland = new Trip("Polska", "Stolicą Polski jest Warszawa");
+        Trip tripJapan = new Trip("Japonia", "Stolicą Japoni jest Tokio");
+
+        //Act
+        tripManager.add(tripPoland);
+        tripManager.add(tripJapan);
+
+        Trip result = tripManager.findTrip("");
+
+        //Assert
+        assertNull(result);
+    }
 }
