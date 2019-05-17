@@ -1,28 +1,34 @@
 package pl.edu.agh.mwo;
 import java.util.*;
 
-public class TripManager {
+class TripManager {
 	private HashMap<String,Trip> tripList;
 	
-	public TripManager() {
-		tripList = new HashMap<String,Trip>();
+	TripManager() {
+		tripList = new HashMap<>();
 	}
 	
-	public void add(Trip trip) throws TripAlreadyExistsException {
-		if (tripList.get(trip.getName()) != null) {
+	void add(Trip trip) throws TripAlreadyExistsException {
+		if (tripAlreadyExist(trip))
 			throw new TripAlreadyExistsException();
-		}
-		else {
-			tripList.put(trip.getName(),trip);
-		}
+		tripList.put(trip.getName(),trip);
 	}
-	
-	public HashMap<String,Trip> getTrips() {
+
+	HashMap<String,Trip> getTrips() {
 		return tripList;
 	}
 
-	public void remove(String name) {
+	Trip findTrip(String keyWord) { //todo dokończyć
+		if (keyWord == null || keyWord.isEmpty())
+			return null;
+	}
+
+	void remove(String name) {
 		tripList.remove(name);
 	}
-	
+
+	private boolean tripAlreadyExist(Trip trip) {
+		return tripList.containsKey(trip.getName());
+	}
+
 }
