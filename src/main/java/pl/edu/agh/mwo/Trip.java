@@ -1,17 +1,14 @@
 package pl.edu.agh.mwo;
 
-import java.util.ArrayList;
-import java.util.List;
-
 class Trip {
 	private String name;
 	private String description;
-	private List<Photo> tripAlbum;
+	private Album tripAlbum;
 	
 	Trip(String name, String description) {
 		this.name = name;
 		this.description = description;
-		tripAlbum = new ArrayList<>();
+		tripAlbum = new Album();
 	}
 
 	String getName() {
@@ -30,11 +27,11 @@ class Trip {
 		this.description = description;
 	}
 
-	void addPhoto(Photo photo) {
-		tripAlbum.add(photo);
+	void addPhotoToTripAlbum(Photo photo) {
+		tripAlbum.addPhoto(photo);
 	}
 
-	List<Photo> getPhotos() {
+	Album getAlbum() {
 		return tripAlbum;
 	}
 }

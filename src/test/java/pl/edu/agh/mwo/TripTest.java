@@ -50,10 +50,11 @@ public class TripTest {
     public void testAddPhoto_thenGetPhotos_returnOnePhoto(){
         //Arrange
         Photo photo = new Photo.Builder().takePhoto();
-        trip.addPhoto(photo);
+        trip.addPhotoToTripAlbum(photo);
 
         //Act
-        List<Photo> photos = trip.getPhotos();
+        Album album = trip.getAlbum();
+        List<Photo> photos = album.getPhotos();
 
         //Assert
         assertEquals(photos.get(0), photo);
