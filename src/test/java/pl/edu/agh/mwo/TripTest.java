@@ -3,6 +3,8 @@ package pl.edu.agh.mwo;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.List;
+
 import static org.testng.Assert.*;
 
 /**
@@ -42,5 +44,18 @@ public class TripTest {
 
         //Assert
         assertEquals(trip.getDescription(), desc);
+    }
+
+    @Test
+    public void testAddPhoto_thenGetPhotos_returnOnePhoto(){
+        //Arrange
+        Photo photo = new Photo.Builder().takePhoto();
+        trip.addPhoto(photo);
+
+        //Act
+        List<Photo> photos = trip.getPhotos();
+
+        //Assert
+        assertEquals(photos.get(0), photo);
     }
 }
